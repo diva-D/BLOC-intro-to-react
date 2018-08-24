@@ -30,19 +30,61 @@
             }
         }
         
+        const user1 = {
+            name: {
+                first: "David",
+                last: "Gentile"
+            },
+            age: 28
+        };
+
+        function formatName(first, last) {
+            return `${first} ${last}`;
+        }
+
+        class User extends React.Component {
+            render() {
+                return (
+                    <div className="user">
+                        <p>User name: {formatName(this.props.user.name.first, this.props.user.name.last)}</p>
+                        <p>User age: {this.props.user.age}</p>
+                    </div>
+                )
+            }
+        }
+
+        class Counter extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    count: 1
+                }
+            }
+
+            render() {
+                return(
+                    <div className="counter">
+                        <p>Counter: {this.state.count}</p>
+                    </div>
+                )
+            }
+        }
+
         class Greeting extends React.Component {
             render() {
                 return (
                     <div>
-                        <h1>Hello World!</h1>
+                        <h1>Hello {this.props.user.name.first}!</h1>
                         <CurrentDate />
+                        <User user={this.props.user}/>
+                        <Counter />
                     </div>
-                );
+                )
             }
         }
 
         ReactDOM.render(
-            <Greeting />, document.getElementById('app')
+            <Greeting user={user1}/>, document.getElementById('app')
         );
 
     </script>
